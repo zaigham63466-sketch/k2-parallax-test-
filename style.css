@@ -80,45 +80,6 @@ canvas#hero-canvas {
     100% { transform: translateY(16px); opacity: 0; }
 }
 
-/* Debug readout with glassmorphism */
-#debug-readout {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    background: rgba(15, 15, 20, 0.5);
-    padding: 16px 20px;
-    border-radius: 12px;
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-    font-size: 13px;
-    z-index: 20;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    color: rgba(255, 255, 255, 0.85);
-    min-width: 160px;
-}
-
-#debug-readout p {
-    margin: 8px 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-#debug-readout p:first-child {
-    margin-top: 0;
-}
-
-#debug-readout p:last-child {
-    margin-bottom: 0;
-}
-
-#debug-readout span {
-    color: #fff;
-    font-weight: 600;
-}
-
 /* Content below the scroll section */
 .normal-content {
     min-height: 100vh;

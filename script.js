@@ -1,7 +1,5 @@
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas.getContext('2d', { alpha: false }); // Optimization for opaque canvas
-const debugFrame = document.getElementById('debug-frame');
-const debugSheets = document.getElementById('debug-sheets');
 const scrollContainer = document.querySelector('.scroll-container');
 const scrollPrompt = document.getElementById('scroll-prompt');
 const k2Text = document.getElementById('k2-text');
@@ -26,11 +24,6 @@ let currentFrameFloat = 0;
 let lastDrawnFrame = -1;
 let rafId;
 
-function updateDebug() {
-    debugFrame.textContent = Math.round(currentFrameFloat);
-    debugSheets.textContent = `${loadedCount} / ${TOTAL_SHEETS}`;
-}
-
 function loadImage(index) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -39,7 +32,6 @@ function loadImage(index) {
             images[index] = img;
             loadedStatus[index] = true;
             loadedCount++;
-            updateDebug();
             resolve();
         };
         img.onerror = () => {
@@ -163,7 +155,6 @@ function loop() {
     
     // 5. Draw calls must happen inside a requestAnimationFrame loop
     drawFrame(currentFrameInt);
-    updateDebug();
     
     // Apple-style cinematic typography fade and scale
     let textOpacity = 0;
