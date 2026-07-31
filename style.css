@@ -1,0 +1,181 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #030305; /* Deep cinematic black */
+    color: #fff;
+    scroll-behavior: smooth;
+    /* Prevent default rubber-band scrolling on some platforms for a cleaner effect */
+    overscroll-behavior: none;
+}
+
+.scroll-container {
+    height: 400vh; /* 100vh for viewport + 300vh for scrollable distance */
+    position: relative;
+}
+
+.hero-section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+canvas#hero-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* Object-fit isn't needed here since we handle scaling within the canvas draw logic,
+       but width/height 100% ensures it physically matches the container */
+}
+
+/* Cinematic vignette overlay */
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* The scroll prompt UI */
+.scroll-prompt {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.8;
+    transition: opacity 0.4s ease;
+}
+
+.scroll-prompt-text {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-prompt-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+    animation: scrollNudge 2s infinite cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes scrollNudge {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { transform: translateY(8px); opacity: 1; }
+    100% { transform: translateY(16px); opacity: 0; }
+}
+
+/* Debug readout with glassmorphism */
+#debug-readout {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: rgba(15, 15, 20, 0.5);
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 13px;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+    min-width: 160px;
+}
+
+#debug-readout p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#debug-readout p:first-child {
+    margin-top: 0;
+}
+
+#debug-readout p:last-child {
+    margin-bottom: 0;
+}
+
+#debug-readout span {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Content below the scroll section */
+.normal-content {
+    min-height: 100vh;
+    padding: 140px 20px;
+    background: #030305;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 -30px 60px rgba(0,0,0,0.8); /* subtle separation shadow */
+}
+
+.normal-content h2 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: -1.5px;
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+.normal-content p {
+    font-size: 1.15rem;
+    color: #888;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+/* Cinematic text overlay */
+.cinematic-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform is handled by JS for the scaling effect */
+    transform: translate(-50%, -50%);
+    font-size: 4.5rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 15;
+    text-align: center;
+    /* Soft shadow for contrast against the mountain */
+    text-shadow: 0 4px 32px rgba(0,0,0,0.6);
+    /* Apple typography: smooth font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 768px) {
+    .cinematic-text {
+        font-size: 3.5rem;
+        line-height: 1.1;
+    }
+}

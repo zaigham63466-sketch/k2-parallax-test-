@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Scroll Animation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scroll-container">
+        <div class="hero-section">
+            <canvas id="hero-canvas"></canvas>
+            <div class="vignette"></div>
+            
+            <div class="cinematic-text" id="k2-text">Ready to mount K2?</div>
+            
+            <div id="debug-readout">
+                <p><span>Frame</span> <span id="debug-frame">0</span>&nbsp;/&nbsp;95</p>
+                <p><span>Sheets</span> <span id="debug-sheets">0 / 6</span></p>
+            </div>
+
+            <div class="scroll-prompt" id="scroll-prompt">
+                <div class="scroll-prompt-text">Scroll to explore</div>
+                <div class="scroll-prompt-line"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="normal-content">
+        <h2>The Summit</h2>
+        <p>This section flows naturally after the cinematic camera push-in. The canvas above unpins seamlessly, revealing the rest of the webpage content.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
